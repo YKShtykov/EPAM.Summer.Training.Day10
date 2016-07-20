@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiboNumbersLogic", "FiboNumbersLogic\FiboNumbersLogic.csproj", "{C5D2BD70-0A2C-426C-ACCB-8D3F746030E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiboNumbersTests", "FiboNumbersTests\FiboNumbersTests.csproj", "{5A421574-4227-47B3-9A7E-F3A248035752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueLogic", "QueueLogic\QueueLogic.csproj", "{4CD81CAA-A656-4428-8422-1ABE0BB4964A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueTests", "QueueTests\QueueTests.csproj", "{9EE7828E-1F7C-467C-8E4B-C64D18404635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetLogic", "SetLogic\SetLogic.csproj", "{8EC7C4CB-72FA-4A52-9E94-8E27E78A9800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetLogicTests", "SetLogicTests\SetLogicTests.csproj", "{9E990270-1133-4769-BB57-1F62618BD9E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5D2BD70-0A2C-426C-ACCB-8D3F746030E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D2BD70-0A2C-426C-ACCB-8D3F746030E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D2BD70-0A2C-426C-ACCB-8D3F746030E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D2BD70-0A2C-426C-ACCB-8D3F746030E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A421574-4227-47B3-9A7E-F3A248035752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A421574-4227-47B3-9A7E-F3A248035752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A421574-4227-47B3-9A7E-F3A248035752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A421574-4227-47B3-9A7E-F3A248035752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD81CAA-A656-4428-8422-1ABE0BB4964A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD81CAA-A656-4428-8422-1ABE0BB4964A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD81CAA-A656-4428-8422-1ABE0BB4964A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD81CAA-A656-4428-8422-1ABE0BB4964A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EE7828E-1F7C-467C-8E4B-C64D18404635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EE7828E-1F7C-467C-8E4B-C64D18404635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EE7828E-1F7C-467C-8E4B-C64D18404635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EE7828E-1F7C-467C-8E4B-C64D18404635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC7C4CB-72FA-4A52-9E94-8E27E78A9800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC7C4CB-72FA-4A52-9E94-8E27E78A9800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC7C4CB-72FA-4A52-9E94-8E27E78A9800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC7C4CB-72FA-4A52-9E94-8E27E78A9800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E990270-1133-4769-BB57-1F62618BD9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E990270-1133-4769-BB57-1F62618BD9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E990270-1133-4769-BB57-1F62618BD9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E990270-1133-4769-BB57-1F62618BD9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
