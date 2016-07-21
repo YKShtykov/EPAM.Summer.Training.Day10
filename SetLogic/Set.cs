@@ -9,19 +9,23 @@ namespace SetLogic
   /// Class-Collection for reference types, realises main operations for multiplicity
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public class Set<T> : IEnumerable<T>
+  public class Set<T> : IEnumerable<KeyValuePair<int, T>>
                        where T : class
   {
-    private List<T> collection;
+    private Dictionary<int,T> collection;
+    private Type setType;
+
     public Set()
     {
-      collection = new List<T>();
+      collection = new Dictionary<int, T>();
+      setType = typeof(T);
     }
+
     public Set(IEnumerable<T> otherCollection) : this()
     {
       foreach (var item in otherCollection)
       {
-        collection.Add(item);
+        collection.Add(item.GetHashCode(),item);
       }
     }
 
@@ -29,27 +33,27 @@ namespace SetLogic
     /// Union of Set and Ienumerable type value
     /// </summary>
     /// <param name="otherCollection">IEnumerable<T> value</param>
-    public void Union(IEnumerable<T> otherCollection)
+    public void UnionWith(IEnumerable<T> otherCollection)
     {
-      collection = (ReferenceEquals(otherCollection, null)) ? collection : new List<T>(collection.Union(otherCollection));
+      SetOperations(otherCollection, (other) => collection.Union(other));
     }
 
     /// <summary>
     /// Intersect of Set and Ienumerable type value
     /// </summary>
     /// <param name="otherCollection">IEnumerable<T> value</param>
-    public void Intersect(IEnumerable<T> otherCollection)
+    public void IntersectWith(IEnumerable<T> otherCollection)
     {
-      collection = (ReferenceEquals(otherCollection, null)) ? collection : new List<T>(collection.Intersect(otherCollection));
+      SetOperations(otherCollection, (other) => collection.Intersect(other));
     }
 
     /// <summary>
     /// Except of Set and Ienumerable type value
     /// </summary>
     /// <param name="otherCollection">IEnumerable<T> value</param>
-    public void Except(IEnumerable<T> otherCollection)
+    public void ExceptWith(IEnumerable<T> otherCollection)
     {
-      collection = (ReferenceEquals(otherCollection, null)) ? collection : new List<T>(collection.Except(otherCollection));
+      SetOperations(otherCollection, (other) => collection.Except(other));
     }
 
     /// <summary>
@@ -57,7 +61,7 @@ namespace SetLogic
     /// </summary>
     public void Distinct()
     {
-      collection = new List<T>(collection.Distinct());
+      collection = collection.Distinct().ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
     /// <summary>
@@ -66,20 +70,27 @@ namespace SetLogic
     public void SymmetryDifference(IEnumerable<T> otherCollection)
     {
       if (ReferenceEquals(otherCollection, null)) return;
-      List<T> temp = otherCollection.ToList();
-       
-      foreach (var item in otherCollection)
+      var temp = ConvertToDictionary(otherCollection);
+      var result = new Dictionary<int, T>();
+
+      foreach (var item in collection)
       {
-        if (collection.Contains(item))
+        if (!temp.ContainsKey(item.Key))
         {
-          collection.Remove(item);
-          temp.Remove(item);
+          result.Add(item.Key, item.Value);
         }
       }
-      collection.AddRange(temp);
+      foreach (var item in temp)
+      {
+        if (!collection.ContainsKey(item.Key))
+        {
+          result.Add(item.Key,item.Value);
+        }
+      }
+      collection = result;
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public IEnumerator<KeyValuePair<int, T>> GetEnumerator()
     {
       return collection.GetEnumerator();
     }
@@ -95,7 +106,7 @@ namespace SetLogic
     /// <param name="item"></param>
     public void Add(T item)
     {
-      collection.Add(item);
+      collection.Add(item.GetHashCode(),item);
     }
 
     /// <summary>
@@ -104,7 +115,7 @@ namespace SetLogic
     /// <param name="item"></param>
     public void Clear()
     {
-      collection = new List<T>();
+      collection = new Dictionary<int, T>();
     }
 
     /// <summary>
@@ -113,17 +124,7 @@ namespace SetLogic
     /// <param name="item">element</param>
     public bool Contains(T item)
     {
-      return collection.Contains(item);
-    }
-
-    /// <summary>
-    /// Copy the set into array elements of T ype
-    /// </summary>
-    /// <param name="array"></param>
-    /// <param name="arrayIndex"></param>
-    public void CopyTo(T[] array, int arrayIndex)
-    {
-      Array.Copy(collection.ToArray<T>(), 0, array, arrayIndex, collection.ToArray<T>().Length);
+      return collection.ContainsKey(item.GetHashCode());
     }
 
     /// <summary>
@@ -131,12 +132,9 @@ namespace SetLogic
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public bool Remove(T item)
+    public void Remove(T item)
     {
-      if(!collection.Contains(item)) return false;
-      collection.Remove(item);
-      if (!collection.Contains(item)) return true;
-      return false;
+      collection.Remove(item.GetHashCode());
     }
 
     /// <summary>
@@ -145,7 +143,24 @@ namespace SetLogic
     /// <returns></returns>
     public List<T> ToList()
     {
-      return new List<T>(collection);
+      return new List<T>(collection.Values.ToList());
+    }
+
+    private Dictionary<int, T> ConvertToDictionary(IEnumerable<T> collection)
+    {
+      Dictionary<int, T> result = new Dictionary<int, T>();
+      foreach (var item in collection)
+      {
+        result.Add(item.GetHashCode(), item);
+      }
+      return result;
+    }
+
+    private void SetOperations(IEnumerable<T> otherCollection, Func<Dictionary<int,T>, IEnumerable<KeyValuePair<int,T>>> func)
+    {
+      var temp = ConvertToDictionary(otherCollection);
+      collection = (ReferenceEquals(otherCollection, null)) ? collection : func(temp).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
     }
   }
 }

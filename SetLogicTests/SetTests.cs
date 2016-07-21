@@ -15,7 +15,7 @@ namespace SetLogicTests
       Set<string> expected = new Set<string>(new string[] { "one", "two", "three" });
 
       //Act
-      actual.Union(new string[] { "two", "three" });
+      actual.UnionWith(new string[] { "two", "three" });
 
       //Assert
       CollectionAssert.AreEqual(expected.ToList(), actual.ToList());
@@ -43,7 +43,7 @@ namespace SetLogicTests
       Set<string> expected = new Set<string>(new string[] { "one" });
 
       //Act
-      actual.Except(new string[] { "two", "three" });
+      actual.ExceptWith(new string[] { "two", "three" });
 
       //Assert
       CollectionAssert.AreEqual(expected.ToList(), actual.ToList());
@@ -57,7 +57,7 @@ namespace SetLogicTests
       Set<string> expected = new Set<string>(new string[] { "two" });
 
       //Act
-      actual.Intersect(new string[] { "two", "three" });
+      actual.IntersectWith(new string[] { "two", "three" });
 
       //Assert
       CollectionAssert.AreEqual(expected.ToList(), actual.ToList());
